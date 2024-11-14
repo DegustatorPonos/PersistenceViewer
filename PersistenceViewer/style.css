@@ -1,0 +1,124 @@
+input {
+    border-radius: 5px;
+    margin: 5px;
+    background: rgb(155, 155, 155);
+    color: rgb(33, 33, 33);
+}
+
+.DatepickerBlock {
+    float: right;
+    margin: 10px 40px 10px 0px;
+}
+
+body {
+    margin: 0px;
+    background: rgb(33, 33, 33);
+    color: rgb(155, 155, 155);
+}
+
+#history_canvas {
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: row;
+}
+
+#breadcrumbsUL {
+    margin: 10px 0px;
+    list-style: none;
+    float: left;
+}
+
+#breadcrumbsUL li {
+    display: inline;
+    font-size: 18px;
+}
+
+#breadcrumbsUL li+li:before {
+    color: rgb(115, 100, 125);
+    content: ">\00a0";
+}
+
+#breadcrumbsUL li a {
+    color: rgb(155, 155, 155);
+    text-decoration: none;
+}
+
+#breadcrumbsUL li:last-child a {
+    color: rgb(225, 225, 250);
+    font-size: 110%;
+}
+
+#breadcrumbsUL li a:hover {
+    color: rgb(225, 225, 250);
+}
+
+#history_canvas table {
+    color: black;
+    border-spacing: 1px;
+    border-radius: 5px;
+    background: rgb(115, 100, 125);
+}
+
+#Items {
+    width: calc(25% - 40px);
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+#History {
+    width: calc(75% - 20px);
+    margin-top: 0px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+#History th:first-child,
+#History td:first-child {
+    width: 52ch;
+}
+
+#History th:nth-child(2),
+#History td:nth-child(2) {
+    width: calc(100% - 52ch);
+}
+
+#history_canvas tbody {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+    max-height: 800px;
+}
+
+#history_canvas tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+#history_canvas th {
+    background: rgb(115, 100, 125);
+}
+
+#history_canvas td {
+    background: rgb(155, 155, 155);
+}
+
+#history_canvas th,
+#history_canvas td {
+    padding: 5px;
+}
+
+#history_canvas td {
+    border: thin solid black;
+}
+
+#history_canvas td.active {
+    outline: thick solid rgb(115, 15, 15);
+}
+
+#history_canvas td.groupItem {
+    background: rgb(115, 135, 105);
+}
