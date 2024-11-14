@@ -247,7 +247,15 @@ function getItems(item) {
                 displayItems(data.members);
             }
             else {
-                displayItems(data);
+                if(data.name == item) {
+                    // If we are here then there are no items that we need to display.
+                    // Therefore, we hide the item table
+                    document.getElementById("Items").style.display = "none";
+                    document.getElementById("History").style.width = "calc(100% - 20px)";
+                }
+                else {
+                    displayItems(data);
+                }
             }
             displayHistory(item);
         },
