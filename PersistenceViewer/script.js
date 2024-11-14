@@ -1,4 +1,4 @@
-// Insert the date locale taht will be applied at the table format here
+// Insert the date locale that will be applied at the table format here
 // Leave empty for default date display
 // Set to 'auto' to let JS decide the value
 const DateTimeDisplayLocale = 'auto'
@@ -17,7 +17,7 @@ var shouldSort = true;
 if (getQueryVariable("shouldsort").toLowerCase() == "false") {
     shouldSort = false;
 }
-console.log("getQueryVariable: serviceId=%s, startItem=%s, startWithGroups=%s, shouldSort=%s",serviceId,startItem,startWithGroups,shouldSort);
+// console.log("getQueryVariable: serviceId=%s, startItem=%s, startWithGroups=%s, shouldSort=%s",serviceId,startItem,startWithGroups,shouldSort);
 document.getElementById("start_tm").defaultValue = "00:00";
 document.getElementById("end_tm").defaultValue = "00:00";
 
@@ -155,7 +155,7 @@ function displayHistory(item) {
         if (serviceId !== "") {
             urlString = urlString + "&serviceId=" + serviceId;
         }
-        console.log("displayHistory API call: urlString=%s",urlString);
+        // console.log("displayHistory API call: urlString=%s",urlString);
         $.ajax({
             url     : urlString,
             data    : {},
@@ -178,7 +178,7 @@ function displayHistory(item) {
                     }
                     else {
                         for (i = 0; i < data.datapoints; i+=1) {
-                            console.log("Parsing event #%s", i);
+                            // console.log("Parsing event #%s", i);
                             row = document.createElement("TR");
                             time = document.createElement("TD");
                             time.innerHTML = getDateString(new Date(data.data[i].time));
