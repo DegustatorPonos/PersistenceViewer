@@ -3,6 +3,9 @@
 // Set to 'auto' to let JS decide the value
 const DateTimeDisplayLocale = 'auto'
 
+// The name of the first breadcrum
+const FirstCrumbName = "House";
+
 var ohURL = window.location.origin;
 var serviceId = getQueryVariable("serviceid").toLowerCase();
 var startItem = getQueryVariable("startitem");
@@ -317,7 +320,7 @@ function setBreadcrumbs(item,isGroup) {
 function createFirstBreadcrumb(item) {
     var newItem = item;
     if (item === startItem) {
-        newItem = "House";
+        newItem = FirstCrumbName;
     }
     var breadcrumbsUL = document.getElementById("breadcrumbsUL");
     var breadcrumb = document.createElement("LI");
