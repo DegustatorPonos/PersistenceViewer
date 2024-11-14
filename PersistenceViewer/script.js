@@ -1,3 +1,8 @@
+// Insert the date locale taht will be applied at the table format here
+// Leave empty for default date display
+// Set to 'auto' to let JS decide the value
+const DateTimeDisplayLocale = 'auto'
+
 var ohURL = window.location.origin;
 var serviceId = getQueryVariable("serviceid").toLowerCase();
 var startItem = getQueryVariable("startitem");
@@ -63,6 +68,7 @@ function getQueryVariable(variable) {
     return "";
 }
 
+// Fills up the items table with group members
 function displayItems(groupMembers) {
     //console.log("displayItems: groupMembers=%s",JSON.stringify(groupMembers));
     //console.log("displayItems: groupMembers.length=%s",groupMembers.length);
@@ -103,6 +109,7 @@ function displayItems(groupMembers) {
     }
 }
 
+// Fills up main event table. Uses the item name as an input
 function displayHistory(item) {
     if (typeof(item) === "undefined" || item === null) {
         item = document.getElementById("breadcrumbsUL").lastElementChild.lastElementChild.innerHTML;
@@ -113,6 +120,7 @@ function displayHistory(item) {
     var time;
     var state;
     if (item === "") {
+        // If API returned null
         row = document.createElement("TR");
         time = document.createElement("TD");
         time.innerHTML = "N/A";
@@ -124,6 +132,7 @@ function displayHistory(item) {
     }
     else {
         //console.log("displayHistory: item=%s",item);
+        // Filling up the selection interval
         var tempDate;
         if (document.getElementById("start_dt").value === "") {
             tempDate = new Date(new Date().setMonth(new Date().getMonth() - 1));
@@ -143,7 +152,7 @@ function displayHistory(item) {
         if (serviceId !== "") {
             urlString = urlString + "&serviceId=" + serviceId;
         }
-        console.log("displayHistory: urlString=%s",urlString);
+        console.log("displayHistory API call: urlString=%s",urlString);
         $.ajax({
             url     : urlString,
             data    : {},
@@ -151,7 +160,8 @@ function displayHistory(item) {
                 //console.log("displayHistory: data=%s",JSON.stringify(data));
                 if (data.datapoints > 0) {
                     var i;
-                    if (data.data.length === 2 * data.datapoints) {//this corrects for a bug in the REST API for OnOffType items that was fixed in ESH after 2.3 release (https://github.com/eclipse/smarthome/issues/5628)
+                    if (data.data.length === 2 * data.datapoints) {
+                        //this corrects for a bug in the REST API for OnOffType items that was fixed in ESH after 2.3 release (https://github.com/eclipse/smarthome/issues/5628)
                         for (i = 0; i < 2 * data.datapoints; i+=2) {
                             row = document.createElement("TR");
                             time = document.createElement("TD");
@@ -165,9 +175,10 @@ function displayHistory(item) {
                     }
                     else {
                         for (i = 0; i < data.datapoints; i+=1) {
+                            console.log("Parsing event #%s", i);
                             row = document.createElement("TR");
                             time = document.createElement("TD");
-                            time.innerHTML = new Date(data.data[i].time);
+                            time.innerHTML = getDateString(new Date(data.data[i].time));
                             row.appendChild(time);
                             state = document.createElement("TD");
                             state.innerHTML = data.data[i].state;
@@ -192,6 +203,18 @@ function displayHistory(item) {
                 console.log("displayHistory: error=%s",error);
             }
         });
+    }
+}
+
+// Sets the date in the correct given format
+function getDateString(date) {
+    if (DateTimeDisplayLocale == '') {
+        return date
+    }
+    else if (DateTimeDisplayLocale == 'auto') {
+        return date.toLocaleString();
+    } else {
+        return date.toLocaleString(DateTimeDisplayLocale);
     }
 }
 
